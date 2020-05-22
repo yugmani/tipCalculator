@@ -3,9 +3,14 @@ const submitEl = document.querySelector("#submit");
 const tipEl = document.querySelector("#tip-amount");
 const totalEl = document.querySelector("#new-total");
 const percentEl = document.querySelector("#tip-percent");
+const twoSplit = document.querySelector("#twoSplit");
+const threeSplit = document.querySelector("#threeSplit");
+const moreSplit = document.querySelector("#moreSplit");
+const form = document.querySelector("#form");
 
 let tip = 0;
 let newTotal = 0;
+let eachSplit = 0;
 
 function tipAmount (bill, percent){
     tip = (percent * bill) / 100;
@@ -32,3 +37,21 @@ submitEl.addEventListener("click", function(event){
 
 })
 
+function splitTotal(num){
+    eachSplit = newTotal / num;
+    // console.log(eachSplit);
+    const splitField = document.querySelector("#split");
+    let html = "";  
+    for (let i=0; i<num; i++){ 
+         html+= `<h4>${i+1}-split: ${eachSplit.toFixed(2)}</h4>  `;
+        console.log(html);
+    }
+    splitField.innerHTML = html;
+}
+
+moreSplit.addEventListener("click", function(event){
+    event.preventDefault();
+    const numberSplit = document.querySelector("#numberSplit");
+    const sp = numberSplit.value;
+    splitTotal(sp);
+})
